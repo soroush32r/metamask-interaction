@@ -8,6 +8,7 @@ document.getElementById("connectButton").onclick = async () => {
       web3 = new Web3(window.ethereum);
       accounts = await web3.eth.getAccounts();
       chainID = await web3.eth.getChainId();
+
       document.getElementById("disconnectButton").disabled = false;
       document.getElementById("connectButton").disabled = true;
       document.getElementById("sendButton").disabled = false;
@@ -58,11 +59,16 @@ document.getElementById("sendButton").onclick = async () => {
     return;
   }
 
+  if (!web3.utils.isAddress(receiver)) {
+    alert("Enter a correct address");
+    return;
+  }
+
   web3.eth
     .sendTransaction({
       from: accounts[0],
       to: receiver,
-      value: web3.utils.toWei(amount, "ether"),
+      value: web3.utils.toWei(amount.toString(), "ether"),
       gasPrice: gasPrice,
       gas: gasLimit,
     })

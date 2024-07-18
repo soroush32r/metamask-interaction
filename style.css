@@ -9,7 +9,7 @@ body {
 button {
   border: none;
   background-color: #f4cece;
-  padding: 4px 8px;
+  padding: 6px 10px;
   border-radius: 5px;
 }
 
@@ -23,6 +23,10 @@ input {
   padding: 10px 5px;
   border-radius: 5px;
   margin: 5px 0;
+}
+
+select {
+  border: none;
 }
 
 .container {
