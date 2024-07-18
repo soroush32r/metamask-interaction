@@ -14,6 +14,8 @@ document.getElementById("connectButton").onclick = async () => {
       document.getElementById("sendButton").disabled = false;
       document.getElementById("switchButton").disabled = false;
       document.getElementById("networkSelect").disabled = false;
+      document.getElementById("receiver").disabled = false;
+      document.getElementById("amount").disabled = false;
       document.getElementById("networkSelect").value = chainID;
       document.getElementById("userAccount").innerHTML =
         "Connect Successfully and account address is : \n" + accounts[0];
@@ -92,6 +94,10 @@ document.getElementById("disconnectButton").onclick = () => {
     document.getElementById("sendButton").disabled = true;
     document.getElementById("switchButton").disabled = true;
     document.getElementById("networkSelect").disabled = true;
+    document.getElementById("receiver").disabled = true;
+    document.getElementById("amount").disabled = true;
     document.getElementById("userAccount").innerHTML = "";
+    document.getElementById("receiver").value = "";
+    document.getElementById("amount").value = "";
   }
 };
