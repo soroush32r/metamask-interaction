@@ -8,6 +8,8 @@ document.getElementById("connectButton").onclick = async () => {
       web3 = new Web3(window.ethereum);
       accounts = await web3.eth.getAccounts();
       chainID = await web3.eth.getChainId();
+      balance = await web3.eth.getBalance(accounts[0]);
+      balance = web3.utils.fromWei(balance, "ether");
 
       document.getElementById("disconnectButton").disabled = false;
       document.getElementById("connectButton").disabled = true;
@@ -16,7 +18,9 @@ document.getElementById("connectButton").onclick = async () => {
       document.getElementById("networkSelect").disabled = false;
       document.getElementById("receiver").disabled = false;
       document.getElementById("amount").disabled = false;
+
       document.getElementById("networkSelect").value = chainID;
+      document.getElementById("balance").innerHTML = `Max balance : ${balance}`;
       document.getElementById("userAccount").innerHTML =
         "Connect Successfully and account address is : \n" + accounts[0];
     } catch (error) {
@@ -96,7 +100,9 @@ document.getElementById("disconnectButton").onclick = () => {
     document.getElementById("networkSelect").disabled = true;
     document.getElementById("receiver").disabled = true;
     document.getElementById("amount").disabled = true;
+
     document.getElementById("userAccount").innerHTML = "";
+    document.getElementById("balance").innerHTML = "";
     document.getElementById("receiver").value = "";
     document.getElementById("amount").value = "";
   }
