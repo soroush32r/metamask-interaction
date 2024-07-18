@@ -1,5 +1,12 @@
 let web3;
 let accounts;
+let chainID;
+
+async function updateBalance() {
+  balance = await web3.eth.getBalance(accounts[0]);
+  balance = web3.utils.fromWei(balance, "ether");
+  document.getElementById("balance").innerHTML = `Max balance : ${balance}`;
+}
 
 document.getElementById("connectButton").onclick = async () => {
   if (typeof window.ethereum !== "undefined") {
@@ -8,8 +15,7 @@ document.getElementById("connectButton").onclick = async () => {
       web3 = new Web3(window.ethereum);
       accounts = await web3.eth.getAccounts();
       chainID = await web3.eth.getChainId();
-      balance = await web3.eth.getBalance(accounts[0]);
-      balance = web3.utils.fromWei(balance, "ether");
+      updateBalance();
 
       document.getElementById("disconnectButton").disabled = false;
       document.getElementById("connectButton").disabled = true;
@@ -20,7 +26,6 @@ document.getElementById("connectButton").onclick = async () => {
       document.getElementById("amount").disabled = false;
 
       document.getElementById("networkSelect").value = chainID;
-      document.getElementById("balance").innerHTML = `Max balance : ${balance}`;
       document.getElementById("userAccount").innerHTML =
         "Connect Successfully and account address is : \n" + accounts[0];
     } catch (error) {
@@ -41,6 +46,7 @@ document.getElementById("switchButton").onclick = async () => {
         method: "wallet_switchEthereumChain",
         params: [{ chainId: web3.utils.toHex(networkId) }],
       });
+      updateBalance();
       alert("Network switched");
     } catch (switchError) {
       if (switchError.code === 4902) {
