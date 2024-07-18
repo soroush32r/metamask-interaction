@@ -38,7 +38,6 @@ document.getElementById("connectButton").onclick = async () => {
 
 document.getElementById("switchButton").onclick = async () => {
   const networkId = document.getElementById("networkSelect").value;
-  const chainID = await web3.eth.getChainId();
 
   if (chainID != networkId)
     try {
